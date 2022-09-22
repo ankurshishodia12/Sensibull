@@ -58,7 +58,7 @@ export default function BasicTable(props) {
         <TableBody >
           {quotesList.length > 0 ? quotesList.map((row, index) => (
             <StyledTableRow
-              key={row.Symbol}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <StyledTableCell component="th" scope="row">

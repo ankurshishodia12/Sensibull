@@ -12,12 +12,7 @@ function Quotes() {
     const { state: { Symbol = "" } } = location;
 
     const [quotesList, setQuotesList] = useState([]);
-    const [expireTime, setExpireTime] = useState(null);
-    const [expire,setIsExpire] = useState(null);
-    let time = null;
-    // const [counter,setCounter] = useState();
 
-    let timer;
     const getQuotes = () => {
         let Api = `https://prototype.sbulltech.com/api/v2/quotes/${Symbol}`;
 
@@ -27,38 +22,37 @@ function Quotes() {
                 let list = data[Symbol];
                 // setIsExpire(true);
                 list.sort((a, b) => (new Date(b.time)).valueOf() - (new Date(a.time)).valueOf());
-                clearInterval(timer);
+
+                // let local_time = moment.utc(list[0].valid_till).local();
+                // let expirTime = (new Date(local_time)).getSeconds();
+                // let currentTime = (new Date()).getSeconds();
+                // let time = parseInt(expirTime - currentTime);
+              
                 setQuotesList(list);
-                setIsExpire(true);
+                setTimeout(() => {
+                    getQuotes();
+                }, 10000);
+               
+
+               
             }
         }).catch(err => console.log('err', err));
 
     }
+    
 
     useEffect(() => {
         getQuotes();
     }, []);
 
-    useEffect(() => {
-            timer = setInterval(() => {
-                getQuotes();
-             },(10000));
-      
-
-    },[expire]);
-
    
-
-
- 
-
-
+   
 
     return (
         <div>
             <div style={Styles.heading}>
                 <div>
-                    Quotes List of {Symbol}
+                    {Symbol}
                 </div>
 
             </div>

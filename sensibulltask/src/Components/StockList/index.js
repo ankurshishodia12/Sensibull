@@ -11,7 +11,7 @@ function StockList(props) {
     const [stockList1,setStockList1] = useState([]);
     const [search,setSearch] = useState('');
 
-    const getStockData = async () => {
+    const getStockData = () => {
 
         let API = "https://prototype.sbulltech.com/api/v2/instruments";
         axios.get(API)
@@ -51,8 +51,6 @@ function StockList(props) {
 
 
     }
-
-    console.log('stockList', stockList);
 
     useEffect(() => {
         getStockData();
