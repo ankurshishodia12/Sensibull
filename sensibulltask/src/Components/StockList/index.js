@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 
 function StockList(props) {
 
-    const [header, setHeader] = useState({});
     const [stockList, setStockList] = useState([]);
     const [stockList1,setStockList1] = useState([]);
     const [search,setSearch] = useState('');
@@ -48,7 +47,7 @@ function StockList(props) {
                 setStockList1(ans);
 
             })
-            .then(err => console.log('err', err));
+            .catch(err => console.log('err', err));
 
 
     }
@@ -60,7 +59,6 @@ function StockList(props) {
     }, []);
 
     const handleSearch = (event) => {
-        debugger;
         let search = event.target.value !=="" ? (event.target.value).toString().toLowerCase() : "";
         let arr = [...stockList1];
         setSearch(search);

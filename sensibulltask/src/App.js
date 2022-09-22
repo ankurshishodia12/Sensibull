@@ -7,6 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
+import Quotes from './Components/Quotes';
 import StockList from './Components/StockList';
 const styles = {
   float: 'left',
@@ -23,10 +24,12 @@ function App() {
     <Router>
     <nav style={{backgroundColor: '#333',overflow: 'hidden',marginBottom:'10px'}}>
           <Link   style={styles} to="/stockList">Sensibull</Link>
+          {/* <Link   style={styles} to="/quotes">Quot</Link> */}
          
     </nav>
     <Routes>
       <Route path='/stockList' element={<StockList />} />
+      <Route path='/quotes' element={<Quotes />} />
       <Route path="/" element={<Navigate replace to="/stockList" />} />
     </Routes>
   </Router>

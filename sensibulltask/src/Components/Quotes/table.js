@@ -13,9 +13,9 @@ import {
   Routes,
   Route,
   Navigate,
-  Link,
-  useNavigate
+  Link
 } from "react-router-dom";
+import moment from 'moment';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,9 +42,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function BasicTable(props) {
-  const { stockList } = props;
-  let navigate = useNavigate();
-
+  const { quotesList } = props;
 
   return (
     <TableContainer style={{ maxHeight: '500px', overflowY: 'scroll' }} component={Paper}>
@@ -52,14 +50,13 @@ export default function BasicTable(props) {
         <TableHead style={{ backgroundColor: '#8cd87c' }}>
           <TableRow>
             <StyledTableCell>#</StyledTableCell>
-            <StyledTableCell >Symbol</StyledTableCell>
-            <StyledTableCell >Name</StyledTableCell>
-            <StyledTableCell >Sector</StyledTableCell>
+            <StyledTableCell >Price</StyledTableCell>
+            <StyledTableCell >Time</StyledTableCell>
             <StyledTableCell >Valid Till</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody >
-          {stockList.length > 0 ? stockList.map((row, index) => (
+          {quotesList.length > 0 ? quotesList.map((row, index) => (
             <StyledTableRow
               key={row.Symbol}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -67,15 +64,9 @@ export default function BasicTable(props) {
               <StyledTableCell component="th" scope="row">
                 {index + 1}
               </StyledTableCell>
-              <StyledTableCell onClick={() => {
-                navigate('/quotes', { state: {  Symbol: row.Symbol }})
-              }} 
-              style={{ color: 'blue',cursor:'pointer' }} >
-               {row.Symbol}
-              </StyledTableCell>
-              <StyledTableCell >{row.Name}</StyledTableCell>
-              <StyledTableCell >{row.Sector}</StyledTableCell>
-              <StyledTableCell >{row.Validtill}</StyledTableCell>
+              <StyledTableCell >&#8377;{(row.price).toFixed(2)}</StyledTableCell>
+              <StyledTableCell >{moment.utc(row.time).local().format("DD-MM-YYYY HH:mm:ss")}</StyledTableCell>
+              <StyledTableCell >{moment.utc(row.valid_till).local().format("DD-MM-YYYY HH:mm:ss")}</StyledTableCell>
             </StyledTableRow>
           )) :
 
